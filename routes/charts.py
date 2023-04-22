@@ -38,7 +38,7 @@ def Charts():
         ]
     )
 
-    print(pandas_frame);
+    # print(pandas_frame);
 
     # initialize the geocoding service
     geolocator = Nominatim(user_agent='my_app')

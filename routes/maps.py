@@ -75,7 +75,7 @@ def Maps():
         columns=['lat', 'lon']
     )
 
-    print(chart_data);
+    # print(chart_data);
 
 
     st.pydeck_chart(pdk.Deck(
