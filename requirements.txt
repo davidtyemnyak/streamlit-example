@@ -1,0 +1,7 @@
+altair
+pandas
+streamlit
+streamlit-echarts
+streamlit-folium
+numpy
+geopy
