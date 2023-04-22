@@ -1,9 +1,9 @@
 import math
 import streamlit as st
 
-from charts import Charts
-from maps import Maps
-
+from routes.upload import Upload
+from routes.charts import Charts
+from routes.maps import Maps
 
 def main():
     # Set the page title and icon
@@ -14,15 +14,18 @@ def main():
 
     # Define the menu options
     menu = [
+        'Upload',
         'Charts',
-        'Map'
+        'Map',
     ]
 
     # Display the menu
     choice = st.sidebar.radio('Select a page', menu)
 
     # Show the appropriate page based on the user's menu choice
-    if choice == 'Charts':
+    if choice == 'Upload':
+        Upload()
+    elif choice == 'Charts':
         Charts()
     elif choice == 'Map':
         Maps()

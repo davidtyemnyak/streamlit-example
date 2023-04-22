@@ -3,6 +3,7 @@ import geopy
 from geopy.geocoders import Nominatim
 import streamlit as st
 import random
+from data import pandas_frame
 
 
 def Charts():
@@ -30,17 +31,20 @@ def Charts():
     # create an empty dataframe with the desired columns
     df = pd.DataFrame(
         columns=[
-            # 'Legal Judgment',
+            'Legal Judgment',
             'Court Location',
-            'Stereotype'
+            'Stereotype',
+            'Count',
         ]
     )
+
+    print(pandas_frame);
 
     # initialize the geocoding service
     geolocator = Nominatim(user_agent='my_app')
 
     # generate ten random rows and add them to the dataframe
-    for i in range(10):
+    for i in range(100):
         # generate a random legal judgment name
         legal_judgment = f"{random.randint(1, 10)} T {random.randint(1, 100)}-{random.randint(2000, 2023)}  {random.choice(court_locations)}"
         # generate a random court location
@@ -49,12 +53,18 @@ def Charts():
         stereotype_value = random.choice(stereotype)
         # add the row to the dataframe
         df = df.append({
-            # 'Legal Judgment': legal_judgment,
+            'Legal Judgment': legal_judgment,
             'Court Location': court_location,
-            'Stereotype': stereotype_value
+            'Stereotype': stereotype_value,
+            'Count': 1
         },
             ignore_index=True
         )
+
+    st.dataframe(df.groupby(['Court Location', 'Stereotype']).count())
+    st.dataframe(df.groupby(['Court Location']).count())
+
+    st.dataframe(pandas_frame)
 
     # display the dataframe
     st.bar_chart(df)

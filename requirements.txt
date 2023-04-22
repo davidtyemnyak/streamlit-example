@@ -5,3 +5,6 @@ streamlit-echarts
 streamlit-folium
 numpy
 geopy
+pydeck
+streamlit-aggrid
+openpyxl
