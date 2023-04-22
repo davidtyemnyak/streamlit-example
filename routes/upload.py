@@ -49,21 +49,27 @@ def Upload():
 
         for item in df.itertuples():
             with st.container():
+                includes = (item.gpt_confidence != None) & (item.gpt_confidence > 5);
+
                 st.title("#" + str(item.myth) + " " + MYTHS[item.myth - 1]);
 
-                st.info("Pravděpodobnost " + str(item.gpt_confidence) + " / 10")
+                if includes:
+                    st.info("Rozsudek obsahuje citaci na tento mýtus")
 
-                # st.write(item.context_excerpts)
+                    # st.write(item.context_excerpts)
 
-                items = item.context_excerpts.replace("[", "").split("(Document(page_content=")
+                    items = item.context_excerpts.replace("[", "").split("(Document(page_content=")
 
-                st.write("Citace z rozsudku indikující mýtus:")
+                    st.write("Citace z rozsudku indikující mýtus:")
 
-                print(len(items))
+                    print(len(items))
 
-                for i in range(1, len(items)):
-                    item = items[i].split(", metadata=")[0]
-                    st.info(item)
+                    for i in range(1, len(items)):
+                        item = items[i].split(", metadata=")[0]
+                        st.info(item)
+
+                else:
+                    st.info("Rozsudek neobsahuje citaci na tento mýtus")
 
         # AgGrid(df1)
             
